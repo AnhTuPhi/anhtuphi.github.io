@@ -1,17 +1,56 @@
-## Hello
+---
+layout: default
+---
 
-[visit my blog](https://anhtuphi.github.io/)
+{% if site.posts.size == 0 %}
+  <h2>No post found</h2>
+{% endif %}
 
-- tên bài bắt buộc bắt đầu bằng chữ in hoa (title)
-- câu đầu tiên là câu giới thiệu về bài viết. câu này là chữ thường
-- 1 bài có 01 tags
-- hỗ trợ ảnh, toggle, bảng, 
-- trích code thì phải xuống dòng không nó sẽ bị ăn theo lề của thẻ cha nó dẫn đến lúc thò lúc thụt
-- thẻ toggle thì cần viết hoa chữ cái đầu nếu không nó đi liền với cái mũi tên hơi xấu. nói chung là cần viết hoa chữ cái đầu hết trừ câu đầu tiên
+<div class="posts">
+  {% for post in paginator.posts %}
+    <article class="post">
+      <h1>
+        <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
+      </h1>
 
+      <div>
+        <span class="date">
+          {{ post.date | date: "%Y-%m-%d" }}
+        </span>
 
-## Referrence
+        <ul class="tag">
+          {% for tag in post.tags %}
+          <li>
+            <a href="{{ site.url }}{{ site.baseurl }}/tags#{{ tag }}">
+              {{ tag }}
+            </a>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
 
-[theme by kiko-now](https://github.com/aweekj/kiko-now) 
+      <div class="entry">
+        {{ post.excerpt }}
+      </div>
 
-[jekyll-doesnt-render-markdown-when-adding-html](https://stackoverflow.com/questions/35193171/jekyll-doesnt-render-markdown-when-adding-html)
+      <!-- <a href="{{ site.baseurl }}{{ post.url }}" class="read-more">Read More</a> -->
+    </article>
+  {% endfor %}
+</div>
+
+<div class="pagination">
+  {% if paginator.previous_page %}
+    <span class="prev">
+      <a href="{{ site.baseurl }}{{ paginator.previous_page_path }}" class="prev">
+        &#xE000; Previous
+      </a>
+    </span>
+  {% endif %}
+  {% if paginator.next_page %}
+    <span class="next">
+      <a href="{{ site.baseurl}}{{ paginator.next_page_path }}" class="next">
+        Next &#xE001;
+      </a>
+    </span>
+  {% endif %}
+</div>
