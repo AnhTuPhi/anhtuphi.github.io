@@ -1,57 +1,68 @@
-<header>
+My Engineering Blog
+===========
 
-<!--
-  <<< Author notes: Course header >>>
-  Include a 1280×640 image, course title in sentence case, and a concise description in emphasis.
-  In your repository settings: enable template repository, add your 1280×640 social image, auto delete head branches.
-  Add your open source license, GitHub uses MIT license.
--->
+Welcome to my official engineering blog where we share the good engineering practices and the things we engineers do that can benefit other engineers in the industry. Comments and feedback are welcome!
 
-# GitHub Pages
+### Getting Started
 
-_Create a site or blog from your GitHub repositories with GitHub Pages._
+The blog runs on [Jekyll](https://jekyllrb.com), an awesome static site builder that is written in Ruby. To get started, clone the repository and run the following steps:
 
-</header>
+```sh
+$ gem install bundler
+$ bundle install
+$ bundle exec jekyll serve
+```
 
-<!--
-  <<< Author notes: Finish >>>
-  Review what we learned, ask for feedback, provide next steps.
--->
+Navigate to `http://localhost:4000` to view the blog. A process runs in the background to watch for changes made to the code. Simply refresh the page to see the updated changes. If you are new to Jekyll, we would recommend that you check out their detailed documentation [here](https://jekyllrb.com/docs/home/).
 
-## Finish
+### Contributing
 
-_Congratulations friend, you've completed this course!_
+Interested in writing a blog entry to the blog? Simply fork the repository and make a pull request with the new entry, a markdown file in the `_posts` folder with the name `YYYY-MM-DD-your-title.md`.
 
-<img src=https://octodex.github.com/images/constructocat2.jpg alt=celebrate width=300 align=right>
+#### Adding Authors
 
-Your blog is now live and has been deployed!
+If you are a new author, add your bio to `_data/authors.yml`, for example:
 
-Here's a recap of all the tasks you've accomplished in your repository:
+```yml
+lian-yuanlin: # This is the ID of the author
+  name: Lian Yuanlin
+  thumbnail: /img/authors/lian-yuanlin.jpg # Use a remote image or add your own image
+  github: alienchow # GitHub Username (optional)
+```
 
-- You enabled GitHub Pages.
-- You selected a theme using the config file.
-- You learned about proper directory format and file naming conventions in Jekyll.
-- You created your first blog post with Jekyll!
+#### Writing your post
 
-### What's next?
+Each post should have the following front matter defined:
 
-- Keep working on your GitHub Pages site... we love seeing what you come up with!
-- We'd love to hear what you thought of this course [in our discussion board](https://github.com/orgs/skills/discussions/categories/github-pages).
-- [Take another GitHub Skills course](https://github.com/skills).
-- [Read the GitHub Getting Started docs](https://docs.github.com/en/get-started).
-- To find projects to contribute to, check out [GitHub Explore](https://github.com/explore).
+|Property|Explanation|Example
+|:---|:---|:---|
+|`layout`|The layout template from the `_layouts` directory. We only have `post` for now.|`post`|
+|`id`|Unique id for each blog entry. This is used by Disqus to uniquely identify posts and should not be modified if a Disqus thread for that post already exists.|`curious-case-of-the-phantom-instance`|
+|`title`|Title of blog entry|`The Curious Case of The Phantom Instance`|
+|`date`|Date of entry in `DDDD-MM-YY HH:MM:SS` format|`2015-12-28 04:39:00`. Note that this is in UTC and posts in the future will not be displayed. To such posts during development, use `bundle exec jekyll serve --future` |
+|`authors`|YAML list of author IDs. The author bio will be retrieved from `_data/authors.yml` and displayed within the post.|`[lian-yuanlin, ...]`|
+|`categories`|YAML list of categories, sorted alphabetically. Only use existing categories in `_data/categories.yml`.|`[Engineering]`|
+|`tags`|YAML list of tags, sorted alphabetically. Please check existing tags on `/tags` and reuse where possible.|`[AWS, Golang]`|
+|`cover_photo`|Relative URL to the FB open graph image (ideally 820x312)|`/img/grab-vietnam-careers-week/son-hai.jpg`|
+|`comments`|Whether to display Disqus comments box. Why would you set this to `false`?|`true`|
+|`excerpt`|Your catchy excerpt that will be shown on the list of blog entries page. Wrap your excerpt in quotes if it spans across multiple lines.|`"Here at the Grab Engineering team, we have built our entire backend stack on top of Amazon Web Services (AWS). Over time, it was inevitable that some habits have started to form when perceiving our backend monitoring statistics."`|
 
-<footer>
+Proceed to write your blog entry in [GitHub-flavoured Markdown](https://help.github.com/articles/basic-writing-and-formatting-syntax/) format. Should you want to add images to your blog entry, the files should be added to the `img/<post-id>` folder.
 
-<!--
-  <<< Author notes: Footer >>>
-  Add a link to get support, GitHub status page, code of conduct, license link.
--->
+When you are done with your entry, simply make a pull request and ping us in the `#eng-bloggers` Slack channel to request for a review!
 
----
+That's it, happy blogging!
 
-Get help: [Post in our discussion board](https://github.com/orgs/skills/discussions/categories/github-pages) &bull; [Review the GitHub status page](https://www.githubstatus.com/)
+### Deployment
 
-&copy; 2023 GitHub &bull; [Code of Conduct](https://www.contributor-covenant.org/version/2/1/code_of_conduct/code_of_conduct.md) &bull; [MIT License](https://gh.io/mit)
+Since we are using custom plugins (such as for authors), GitHub will not build and deploy the generated site for us. We use a custom gem `jgd` meant for deploying Jekyll pages manually.
 
-</footer>
+```sh
+$ jgd
+```
+
+This step is automatically carried out on Travis CI, you just need to commit on master to trigger the script. For more details, see the script in `.travis.yml`.
+
+### License
+
+MIT License
