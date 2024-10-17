@@ -1,26 +1,56 @@
 ---
 layout: default
 ---
-<div class="wrapper">
-  <div class="home">
-    {% include posts-list.html posts=paginator.posts %}
-    <hr>
-    <br>
-    <!-- Pagination links -->
-    <div class="row">
-      <div class="col-xs-4">
-        {% if paginator.previous_page %}
-        <a href="{{ paginator.previous_page_path }}" class="btn previous">Prev</a>
-        {% endif %}
+
+{% if site.posts.size == 0 %}
+  <h2>No post found</h2>
+{% endif %}
+
+<div class="posts">
+  {% for post in paginator.posts %}
+    <article class="post">
+      <h1>
+        <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
+      </h1>
+
+      <div>
+        <span class="date">
+          {{ post.date | date: "%Y-%m-%d" }}
+        </span>
+
+        <ul class="tag">
+          {% for tag in post.tags %}
+          <li>
+            <a href="{{ site.url }}{{ site.baseurl }}/tags#{{ tag }}">
+              {{ tag }}
+            </a>
+          </li>
+          {% endfor %}
+        </ul>
       </div>
-      <div class="col-xs-4 text-center">
-        <p>{{ paginator.page }} of {{ paginator.total_pages }}</p>
+
+      <div class="entry">
+        {{ post.excerpt }}
       </div>
-      <div class="col-xs-4 text-right">
-        {% if paginator.next_page %}
-        <a href="{{ paginator.next_page_path }}" class="btn next">Next</a>
-        {% endif %}
-      </div>
-    </div>
-  </div>
+
+      <!-- <a href="{{ site.baseurl }}{{ post.url }}" class="read-more">Read More</a> -->
+    </article>
+  {% endfor %}
+</div>
+
+<div class="pagination">
+  {% if paginator.previous_page %}
+    <span class="prev">
+      <a href="{{ site.baseurl }}{{ paginator.previous_page_path }}" class="prev">
+        &#xE000; Previous
+      </a>
+    </span>
+  {% endif %}
+  {% if paginator.next_page %}
+    <span class="next">
+      <a href="{{ site.baseurl}}{{ paginator.next_page_path }}" class="next">
+        Next &#xE001;
+      </a>
+    </span>
+  {% endif %}
 </div>

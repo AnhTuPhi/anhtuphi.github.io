@@ -1,8 +1,7 @@
-source 'https://rubygems.org'
+# frozen_string_literal: true
 
-gem 'jekyll', group: :jekyll_plugins
-gem 'jekyll-archives', group: :jekyll_plugins
-gem 'jekyll-paginate', group: :jekyll_plugins
-gem 'jgd'
+source "https://rubygems.org"
 
-gem "webrick", "~> 1.7"
+gem "jekyll-sitemap"
+gem "jekyll-feed"
+gem "jekyll-paginate"
