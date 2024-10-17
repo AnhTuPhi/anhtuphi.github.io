@@ -3,10 +3,10 @@
 #
 
 # Name of your site (displayed in the header)
-name: Hello
+name: AnhTuPhi
 
 # Short bio or description (displayed in the header)
-description: DE from Somewhere
+description: Software Engineer
 
 #
 # Flags below are optional
@@ -32,7 +32,7 @@ navigation:
   #   url: https://github.com/AWEEKJ/kiko-now
 
 # Pagination
-paginate: 8
+paginate: 10
 
 # Includes an icon in the footer for each username you enter
 footer-links:
@@ -56,7 +56,7 @@ footer-links:
   tele:
 
 # Text under the icons in footer
-footer-text: © 2017 Kiko Now
+footer-text: © anhtuphi.github.io
 
 # Enter your Disqus shortname (not your username) to enable commenting on posts
 # You can find your shortname on the Settings page of your Disqus account
